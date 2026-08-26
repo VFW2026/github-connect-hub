@@ -105,7 +105,7 @@ const PROJECTS = [
 ];
 
 function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  
   const [filter, setFilter] = useState("all");
 
   const visible =
