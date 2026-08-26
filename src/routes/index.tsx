@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import work01 from "@/assets/work-01.jpg";
 import work02 from "@/assets/work-02.jpg";
 import work03 from "@/assets/work-03.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,7 +30,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const NAV = ["work", "services", "ipsum branding®", "about", "blog", "contact"];
+
+
 
 const FILTERS = [
   "all",
@@ -101,7 +105,7 @@ const PROJECTS = [
 ];
 
 function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  
   const [filter, setFilter] = useState("all");
 
   const visible =
@@ -111,45 +115,8 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
-      <header className="fixed inset-x-0 top-0 z-100 flex h-21 items-center justify-between border-b border-border bg-background/90 px-6 backdrop-blur md:px-10">
-        <a href="/" className="text-xl font-bold tracking-tight">
-          Lorem
-        </a>
+      <SiteHeader />
 
-        <nav
-          className={`${
-            menuOpen ? "translate-y-0" : "-translate-y-[110%]"
-          } fixed inset-x-0 top-21 border-b border-border bg-background transition-transform duration-300 md:static md:translate-y-0 md:border-0 md:bg-transparent`}
-        >
-          <ul className="flex flex-col gap-4 px-6 pt-5 pb-7 md:flex-row md:gap-8 md:p-0">
-            {NAV.map((item, i) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  onClick={() => setMenuOpen(false)}
-                  className={`relative inline-block py-1 text-sm font-semibold lowercase after:absolute after:bottom-0 after:left-0 after:h-px after:bg-foreground after:transition-all after:duration-250 hover:after:w-full ${
-                    i === 0 ? "after:w-full" : "after:w-0"
-                  }`}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
-          className="flex flex-col gap-[5px] p-1.5 md:hidden"
-        >
-          <span className="h-0.5 w-6 bg-foreground" />
-          <span className="h-0.5 w-6 bg-foreground" />
-          <span className="h-0.5 w-6 bg-foreground" />
-        </button>
-      </header>
 
       <section className="mx-auto max-w-[1200px] px-6 pt-[calc(5.25rem+90px)] pb-15 md:px-10">
         <p className="text-xs tracking-[0.14em] uppercase text-muted-foreground">
@@ -231,66 +198,8 @@ function Index() {
         </a>
       </section>
 
-      <footer className="bg-footer px-6 pt-22 pb-10 text-footer-foreground md:px-10">
-        <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
-          <div>
-            <p className="mb-3.5 text-xs tracking-[0.12em] uppercase text-footer-label">
-              Say hello
-            </p>
-            <h3 className="mb-4 text-[26px] font-bold">
-              hello@loremstudio.example
-            </h3>
-            <p className="mb-2.5 text-sm leading-relaxed text-footer-muted">
-              Level 4, 123 Ipsum Street, Dolor City DC 1000
-            </p>
-            <p className="text-sm leading-relaxed text-footer-muted">Sitamet</p>
-          </div>
+      <SiteFooter />
 
-          <div>
-            <p className="mb-3.5 text-xs tracking-[0.12em] uppercase text-footer-label">
-              Liberté, visualité, identité
-            </p>
-            <p className="mb-2.5 text-sm leading-relaxed text-footer-muted">
-              Daily eye-candies on our
-            </p>
-            <a
-              href="#"
-              className="mb-2.5 inline-block border-b border-transparent text-base font-semibold hover:border-footer-foreground"
-            >
-              Loremgram
-            </a>
-            <p className="text-sm leading-relaxed text-footer-muted">
-              Follow, invite, join, get inspired, be kind
-            </p>
-          </div>
-
-          <div>
-            <p className="mb-3.5 text-xs tracking-[0.12em] uppercase text-footer-label">
-              Find us on
-            </p>
-            <a
-              href="#"
-              className="mb-2.5 block w-fit border-b border-transparent text-base font-semibold hover:border-footer-foreground"
-            >
-              LinkedIn
-            </a>
-            <p className="mb-2.5 text-sm leading-relaxed text-footer-muted">
-              Tons of works on
-            </p>
-            <a
-              href="#"
-              className="inline-block border-b border-transparent text-base font-semibold hover:border-footer-foreground"
-            >
-              Behance
-            </a>
-          </div>
-        </div>
-
-        <div className="mx-auto mt-17 flex max-w-[1200px] flex-wrap justify-between gap-2.5 border-t border-footer-border pt-6 text-xs text-footer-label">
-          <span>© 2026 Lorem Studio. All rights reserved.</span>
-          <span>Lorem Ipsum / Dolor Sit / Amet Consectetur</span>
-        </div>
-      </footer>
     </div>
   );
 }
