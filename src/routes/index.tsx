@@ -61,21 +61,43 @@ function Index() {
 
       <div className="sticky top-21 z-90 border-b border-border bg-background px-6 pt-5 pb-6.5 md:px-10">
         <div className="mx-auto flex max-w-[1200px] flex-wrap gap-2.5">
-          {FILTERS.map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => setFilter(f)}
-              aria-pressed={filter === f}
-              className={`cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors ${
-                filter === f
-                  ? "border-transparent bg-primary text-primary-foreground"
-                  : "border-transparent bg-secondary text-secondary-foreground hover:border-foreground"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+          {FILTERS.map((f) =>
+            f === "all" ? (
+              <Link
+                key={f}
+                to="/"
+                activeOptions={{ exact: true }}
+                activeProps={{
+                  className:
+                    "border-transparent bg-primary text-primary-foreground",
+                }}
+                inactiveProps={{
+                  className:
+                    "border-transparent bg-secondary text-secondary-foreground hover:border-foreground",
+                }}
+                className="cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors"
+              >
+                {f}
+              </Link>
+            ) : (
+              <Link
+                key={f}
+                to="/project/$slug"
+                params={{ slug: f }}
+                activeProps={{
+                  className:
+                    "border-transparent bg-primary text-primary-foreground",
+                }}
+                inactiveProps={{
+                  className:
+                    "border-transparent bg-secondary text-secondary-foreground hover:border-foreground",
+                }}
+                className="cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors"
+              >
+                {f}
+              </Link>
+            ),
+          )}
         </div>
       </div>
 
