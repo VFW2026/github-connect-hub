@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { SiteFooter } from "@/components/SiteFooter";
@@ -45,13 +45,21 @@ const FILTERS = [
   "magna",
 ];
 
-const PROJECTS = [
+const PROJECTS: {
+  tag: string;
+  title: string;
+  desc: string;
+  categories: string[];
+  image: string;
+  to?: "/project/lorem";
+}[] = [
   {
     tag: "Lorem",
     title: "Lorem Ipsum Dolor",
     desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
     categories: ["lorem", "ipsum"],
     image: work01,
+    to: "/project/lorem",
   },
   {
     tag: "Ipsum",
@@ -154,34 +162,46 @@ function Index() {
       </div>
 
       <section className="mx-auto grid max-w-[1200px] grid-cols-1 gap-x-10 gap-y-15 px-6 pt-15 pb-25 md:grid-cols-2 md:px-10">
-        {visible.map((p) => (
-          <article key={p.title} className="group cursor-pointer">
-            <div className="relative aspect-square overflow-hidden rounded-xl bg-secondary">
-              <span className="absolute top-4 left-4 z-10 rounded-full bg-background/90 px-3 py-1.5 text-[11px] font-bold tracking-[0.08em] uppercase">
-                {p.tag}
-              </span>
-              <img
-                src={p.image}
-                alt={`${p.title} project thumbnail`}
-                loading="lazy"
-                width={1024}
-                height={1024}
-                className="h-full w-full object-cover transition-transform duration-600 ease-out group-hover:scale-[1.06]"
-              />
-            </div>
-            <div className="mt-4.5 flex items-baseline justify-between gap-6 border-b border-border pb-4.5">
-              <div>
-                <h3 className="text-[22px] font-bold">{p.title}</h3>
-                <p className="mt-1.5 max-w-[480px] text-sm leading-snug text-muted-foreground">
-                  {p.desc}
-                </p>
+        {visible.map((p) => {
+          const inner = (
+            <>
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-secondary">
+                <span className="absolute top-4 left-4 z-10 rounded-full bg-background/90 px-3 py-1.5 text-[11px] font-bold tracking-[0.08em] uppercase">
+                  {p.tag}
+                </span>
+                <img
+                  src={p.image}
+                  alt={`${p.title} project thumbnail`}
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  className="h-full w-full object-cover transition-transform duration-600 ease-out group-hover:scale-[1.06]"
+                />
               </div>
-              <span className="text-[22px] transition-transform duration-300 group-hover:rotate-45">
-                ↗
-              </span>
-            </div>
-          </article>
-        ))}
+              <div className="mt-4.5 flex items-baseline justify-between gap-6 border-b border-border pb-4.5">
+                <div>
+                  <h3 className="text-[22px] font-bold">{p.title}</h3>
+                  <p className="mt-1.5 max-w-[480px] text-sm leading-snug text-muted-foreground">
+                    {p.desc}
+                  </p>
+                </div>
+                <span className="text-[22px] transition-transform duration-300 group-hover:rotate-45">
+                  ↗
+                </span>
+              </div>
+            </>
+          );
+
+          return p.to ? (
+            <Link key={p.title} to={p.to} className="group block cursor-pointer">
+              {inner}
+            </Link>
+          ) : (
+            <article key={p.title} className="group cursor-pointer">
+              {inner}
+            </article>
+          );
+        })}
       </section>
 
       <section className="mx-auto mb-10 max-w-[1200px] px-6 py-20 text-center md:px-10">
