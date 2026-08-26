@@ -4,10 +4,8 @@ import { useState } from "react";
 const NAV = [
   { label: "work", to: "/" as const },
   { label: "services", to: null },
-  { label: "ipsum branding®", to: null },
   { label: "about", to: "/about" as const },
-  { label: "blog", to: null },
-  { label: "contact", to: null },
+  { label: "contact", to: "/contact" as const },
 ];
 
 export function SiteHeader() {
