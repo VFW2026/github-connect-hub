@@ -132,14 +132,15 @@ function Index() {
             </>
           );
 
-          return p.to ? (
-            <Link key={p.title} to={p.to} className="group block cursor-pointer">
+          return (
+            <Link
+              key={p.slug}
+              to="/project/$slug"
+              params={{ slug: p.slug }}
+              className="group block cursor-pointer"
+            >
               {inner}
             </Link>
-          ) : (
-            <article key={p.title} className="group cursor-pointer">
-              {inner}
-            </article>
           );
         })}
       </section>
