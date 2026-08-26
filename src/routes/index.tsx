@@ -32,84 +32,8 @@ export const Route = createFileRoute("/")({
 
 
 
-const FILTERS = [
-  "all",
-  "lorem",
-  "ipsum",
-  "dolor",
-  "sit",
-  "amet",
-  "consectetur",
-  "tempor",
-  "magna",
-];
+const FILTERS = ["all", ...PROJECTS.map((p) => p.slug)];
 
-const PROJECTS: {
-  tag: string;
-  title: string;
-  desc: string;
-  categories: string[];
-  image: string;
-  to?: "/project/lorem";
-}[] = [
-  {
-    tag: "Lorem",
-    title: "Lorem Ipsum Dolor",
-    desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
-    categories: ["lorem", "ipsum"],
-    image: work01,
-    to: "/project/lorem",
-  },
-  {
-    tag: "Ipsum",
-    title: "Sit Amet Consectetur",
-    desc: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-    categories: ["ipsum", "dolor"],
-    image: work02,
-  },
-  {
-    tag: "Dolor",
-    title: "Adipiscing Elit Sed",
-    desc: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.",
-    categories: ["dolor", "sit"],
-    image: work03,
-  },
-  {
-    tag: "Amet",
-    title: "Tempor Incididunt",
-    desc: "Ut enim ad minima veniam quis nostrum exercitationem ullam.",
-    categories: ["amet", "consectetur"],
-    image: work01,
-  },
-  {
-    tag: "Tempor",
-    title: "Ut Labore Et Dolore",
-    desc: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse.",
-    categories: ["tempor", "magna"],
-    image: work02,
-  },
-  {
-    tag: "Magna",
-    title: "Aliqua Veniam Quis",
-    desc: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
-    categories: ["magna", "lorem"],
-    image: work03,
-  },
-  {
-    tag: "Consectetur",
-    title: "Nostrud Exercitation",
-    desc: "Excepteur sint occaecat cupidatat non proident sunt in culpa.",
-    categories: ["consectetur", "sit"],
-    image: work01,
-  },
-  {
-    tag: "Sit",
-    title: "Ullamco Laboris Nisi",
-    desc: "Officia deserunt mollit anim id est laborum sed ut perspiciatis.",
-    categories: ["sit", "amet"],
-    image: work02,
-  },
-];
 
 function Index() {
   
