@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ProjectLoremRouteImport } from './routes/project.lorem'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,44 +28,35 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectLoremRoute = ProjectLoremRouteImport.update({
-  id: '/project/lorem',
-  path: '/project/lorem',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/project/lorem': typeof ProjectLoremRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/project/lorem': typeof ProjectLoremRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/project/lorem': typeof ProjectLoremRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/project/lorem'
+  fullPaths: '/' | '/about' | '/contact'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/project/lorem'
-  id: '__root__' | '/' | '/about' | '/contact' | '/project/lorem'
+  to: '/' | '/about' | '/contact'
+  id: '__root__' | '/' | '/about' | '/contact'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  ProjectLoremRoute: typeof ProjectLoremRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,13 +82,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/project/lorem': {
-      id: '/project/lorem'
-      path: '/project/lorem'
-      fullPath: '/project/lorem'
-      preLoaderRoute: typeof ProjectLoremRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -106,7 +89,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  ProjectLoremRoute: ProjectLoremRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
