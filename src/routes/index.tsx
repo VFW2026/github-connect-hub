@@ -3,9 +3,8 @@ import { useState } from "react";
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import work01 from "@/assets/work-01.jpg";
-import work02 from "@/assets/work-02.jpg";
-import work03 from "@/assets/work-03.jpg";
+import { PROJECTS } from "@/lib/projects";
+
 
 
 export const Route = createFileRoute("/")({
