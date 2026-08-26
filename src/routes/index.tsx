@@ -36,13 +36,8 @@ const FILTERS = ["all", ...PROJECTS.map((p) => p.slug)];
 
 
 function Index() {
-  
-  const [filter, setFilter] = useState("all");
+  const visible = PROJECTS;
 
-  const visible =
-    filter === "all"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.categories.includes(filter));
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
