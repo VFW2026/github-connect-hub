@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import work01 from "@/assets/work-01.jpg";
-import work02 from "@/assets/work-02.jpg";
-import work03 from "@/assets/work-03.jpg";
+import { PROJECTS } from "@/lib/projects";
+
 
 
 export const Route = createFileRoute("/")({
@@ -33,93 +32,12 @@ export const Route = createFileRoute("/")({
 
 
 
-const FILTERS = [
-  "all",
-  "lorem",
-  "ipsum",
-  "dolor",
-  "sit",
-  "amet",
-  "consectetur",
-  "tempor",
-  "magna",
-];
+const FILTERS = ["all", ...PROJECTS.map((p) => p.slug)];
 
-const PROJECTS: {
-  tag: string;
-  title: string;
-  desc: string;
-  categories: string[];
-  image: string;
-  to?: "/project/lorem";
-}[] = [
-  {
-    tag: "Lorem",
-    title: "Lorem Ipsum Dolor",
-    desc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
-    categories: ["lorem", "ipsum"],
-    image: work01,
-    to: "/project/lorem",
-  },
-  {
-    tag: "Ipsum",
-    title: "Sit Amet Consectetur",
-    desc: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-    categories: ["ipsum", "dolor"],
-    image: work02,
-  },
-  {
-    tag: "Dolor",
-    title: "Adipiscing Elit Sed",
-    desc: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.",
-    categories: ["dolor", "sit"],
-    image: work03,
-  },
-  {
-    tag: "Amet",
-    title: "Tempor Incididunt",
-    desc: "Ut enim ad minima veniam quis nostrum exercitationem ullam.",
-    categories: ["amet", "consectetur"],
-    image: work01,
-  },
-  {
-    tag: "Tempor",
-    title: "Ut Labore Et Dolore",
-    desc: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse.",
-    categories: ["tempor", "magna"],
-    image: work02,
-  },
-  {
-    tag: "Magna",
-    title: "Aliqua Veniam Quis",
-    desc: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
-    categories: ["magna", "lorem"],
-    image: work03,
-  },
-  {
-    tag: "Consectetur",
-    title: "Nostrud Exercitation",
-    desc: "Excepteur sint occaecat cupidatat non proident sunt in culpa.",
-    categories: ["consectetur", "sit"],
-    image: work01,
-  },
-  {
-    tag: "Sit",
-    title: "Ullamco Laboris Nisi",
-    desc: "Officia deserunt mollit anim id est laborum sed ut perspiciatis.",
-    categories: ["sit", "amet"],
-    image: work02,
-  },
-];
 
 function Index() {
-  
-  const [filter, setFilter] = useState("all");
+  const visible = PROJECTS;
 
-  const visible =
-    filter === "all"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.categories.includes(filter));
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
@@ -143,21 +61,43 @@ function Index() {
 
       <div className="sticky top-21 z-90 border-b border-border bg-background px-6 pt-5 pb-6.5 md:px-10">
         <div className="mx-auto flex max-w-[1200px] flex-wrap gap-2.5">
-          {FILTERS.map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => setFilter(f)}
-              aria-pressed={filter === f}
-              className={`cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors ${
-                filter === f
-                  ? "border-transparent bg-primary text-primary-foreground"
-                  : "border-transparent bg-secondary text-secondary-foreground hover:border-foreground"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+          {FILTERS.map((f) =>
+            f === "all" ? (
+              <Link
+                key={f}
+                to="/"
+                activeOptions={{ exact: true }}
+                activeProps={{
+                  className:
+                    "border-transparent bg-primary text-primary-foreground",
+                }}
+                inactiveProps={{
+                  className:
+                    "border-transparent bg-secondary text-secondary-foreground hover:border-foreground",
+                }}
+                className="cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors"
+              >
+                {f}
+              </Link>
+            ) : (
+              <Link
+                key={f}
+                to="/project/$slug"
+                params={{ slug: f }}
+                activeProps={{
+                  className:
+                    "border-transparent bg-primary text-primary-foreground",
+                }}
+                inactiveProps={{
+                  className:
+                    "border-transparent bg-secondary text-secondary-foreground hover:border-foreground",
+                }}
+                className="cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors"
+              >
+                {f}
+              </Link>
+            ),
+          )}
         </div>
       </div>
 
@@ -192,14 +132,15 @@ function Index() {
             </>
           );
 
-          return p.to ? (
-            <Link key={p.title} to={p.to} className="group block cursor-pointer">
+          return (
+            <Link
+              key={p.slug}
+              to="/project/$slug"
+              params={{ slug: p.slug }}
+              className="group block cursor-pointer"
+            >
               {inner}
             </Link>
-          ) : (
-            <article key={p.title} className="group cursor-pointer">
-              {inner}
-            </article>
           );
         })}
       </section>
