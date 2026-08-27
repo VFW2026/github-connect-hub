@@ -9,29 +9,22 @@ const NAV = [
 ];
 
 export function SiteHeader() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const linkClass =
-    "relative inline-block py-1 text-sm font-semibold lowercase after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-foreground after:transition-all after:duration-250 hover:after:w-full";
+    "relative inline-block py-1 text-[0.7rem] font-semibold lowercase whitespace-nowrap after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-foreground after:transition-all after:duration-250 hover:after:w-full sm:text-sm";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-100 flex h-21 items-center justify-between border-b border-border bg-background/90 px-6 backdrop-blur md:px-10">
-      <Link to="/" className="text-xl font-bold tracking-tight">
+    <header className="fixed inset-x-0 top-0 z-100 grid h-21 grid-cols-[auto_minmax(0,1fr)] items-center gap-3 border-b border-border bg-background/90 px-4 backdrop-blur sm:gap-6 sm:px-6 md:px-10">
+      <Link to="/" className="shrink-0 text-lg font-bold tracking-tight sm:text-xl">
         Lorem
       </Link>
 
-      <nav
-        className={`${
-          menuOpen ? "translate-y-0" : "-translate-y-[110%]"
-        } fixed inset-x-0 top-21 border-b border-border bg-background transition-transform duration-300 md:static md:translate-y-0 md:border-0 md:bg-transparent`}
-      >
-        <ul className="flex flex-col gap-4 px-6 pt-5 pb-7 md:flex-row md:gap-8 md:p-0">
+      <nav className="min-w-0 justify-self-end">
+        <ul className="flex flex-row items-center gap-3 sm:gap-6 md:gap-8">
           {NAV.map((item) => (
             <li key={item.label}>
               {item.to ? (
                 <Link
                   to={item.to}
-                  onClick={() => setMenuOpen(false)}
                   activeOptions={{ exact: true }}
                   activeProps={{ className: "after:w-full" }}
                   className={linkClass}
@@ -39,11 +32,7 @@ export function SiteHeader() {
                   {item.label}
                 </Link>
               ) : (
-                <a
-                  href="#"
-                  onClick={() => setMenuOpen(false)}
-                  className={linkClass}
-                >
+                <a href="#" className={linkClass}>
                   {item.label}
                 </a>
               )}
@@ -51,18 +40,6 @@ export function SiteHeader() {
           ))}
         </ul>
       </nav>
-
-      <button
-        type="button"
-        aria-label="Toggle menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((o) => !o)}
-        className="flex flex-col gap-[5px] p-1.5 md:hidden"
-      >
-        <span className="h-0.5 w-6 bg-foreground" />
-        <span className="h-0.5 w-6 bg-foreground" />
-        <span className="h-0.5 w-6 bg-foreground" />
-      </button>
     </header>
   );
 }
