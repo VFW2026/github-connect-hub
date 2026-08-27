@@ -32,7 +32,10 @@ export const Route = createFileRoute("/")({
 
 
 
-const FILTERS = ["all", ...PROJECTS.map((p) => p.slug)];
+const FILTERS = [
+  { slug: "all", label: "all" },
+  ...PROJECTS.map((p) => ({ slug: p.slug, label: p.menuLabel })),
+];
 
 
 function Index() {
@@ -62,9 +65,9 @@ function Index() {
       <div className="sticky top-21 z-90 border-b border-border bg-background px-6 pt-5 pb-6.5 md:px-10">
         <div className="mx-auto flex max-w-[1200px] flex-wrap gap-2.5">
           {FILTERS.map((f) =>
-            f === "all" ? (
+            f.slug === "all" ? (
               <Link
-                key={f}
+                key={f.slug}
                 to="/"
                 activeOptions={{ exact: true }}
                 activeProps={{
@@ -77,13 +80,13 @@ function Index() {
                 }}
                 className="cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors"
               >
-                {f}
+                {f.label}
               </Link>
             ) : (
               <Link
-                key={f}
+                key={f.slug}
                 to="/project/$slug"
-                params={{ slug: f }}
+                params={{ slug: f.slug }}
                 activeProps={{
                   className:
                     "border-transparent bg-primary text-primary-foreground",
@@ -94,7 +97,7 @@ function Index() {
                 }}
                 className="cursor-pointer rounded-full border px-4.5 py-2.5 text-[13px] font-semibold whitespace-nowrap capitalize transition-colors"
               >
-                {f}
+                {f.label}
               </Link>
             ),
           )}
