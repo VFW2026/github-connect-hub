@@ -5,6 +5,7 @@ import work03 from "@/assets/work-03.jpg";
 export type Project = {
   slug: string;
   tag: string;
+  menuLabel: string;
   title: string;
   desc: string;
   categories: string[];
