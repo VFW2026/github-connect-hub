@@ -20,7 +20,10 @@ const gallery = (title: string, order: string[]) =>
     "colour and material palette",
     "poster series detail",
     "signage mockup",
-  ].map((label, i) => ({ src: order[i % order.length], alt: `${title} ${label}` }));
+  ].map((label, i) => ({
+    src: order[i % order.length]!,
+    alt: `${title} ${label}`,
+  }));
 
 const A = [work01, work02, work03];
 const B = [work02, work03, work01];
