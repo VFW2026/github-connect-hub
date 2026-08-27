@@ -32,7 +32,10 @@ export const Route = createFileRoute("/")({
 
 
 
-const FILTERS = ["all", ...PROJECTS.map((p) => p.slug)];
+const FILTERS = [
+  { slug: "all", label: "all" },
+  ...PROJECTS.map((p) => ({ slug: p.slug, label: p.menuLabel })),
+];
 
 
 function Index() {
