@@ -82,7 +82,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1200px] px-6 pt-[calc(5.25rem+90px)] pb-15 md:px-10">
+      <section className="mx-auto max-w-[1200px] px-6 pt-16 pb-15 md:px-10">
         <p className="text-xs tracking-[0.14em] uppercase text-muted-foreground">
           About / Lorem Studio
         </p>
