@@ -62,7 +62,7 @@ export function SiteHeader() {
 
       {/* Mobile dropdown */}
       {open && (
-        <nav className="absolute inset-x-0 top-full border-b border-border bg-background/95 backdrop-blur sm:hidden">
+        <nav className="absolute inset-x-0 top-full border-b border-border bg-background shadow-sm sm:hidden">
           <ul className="flex flex-col px-4 py-2">
             {NAV.map((item) => (
               <li key={item.label} onClick={() => setOpen(false)}>
