@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import aboutHero from "@/assets/about-hero.jpg";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
