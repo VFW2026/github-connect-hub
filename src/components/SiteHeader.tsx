@@ -29,20 +29,14 @@ export function SiteHeader() {
         <ul className="flex flex-row items-center gap-3 sm:gap-6 md:gap-8">
           {NAV.map((item) => (
             <li key={item.label}>
-              {item.to ? (
-                <Link
-                  to={item.to}
-                  activeOptions={{ exact: true }}
-                  activeProps={{ className: "after:w-full" }}
-                  className={linkClass}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a href="#" className={linkClass}>
-                  {item.label}
-                </a>
-              )}
+              <Link
+                to={item.to}
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "after:w-full" }}
+                className={linkClass}
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
@@ -65,22 +59,16 @@ export function SiteHeader() {
           <ul className="flex flex-col px-4 py-2">
             {NAV.map((item) => (
               <li key={item.label} onClick={() => setOpen(false)}>
-                {item.to ? (
-                  <Link
-                    to={item.to}
-                    activeOptions={{ exact: true }}
-                    className={mobileLinkClass}
-                  >
-                    {item.label}
-                    {item.to === pathname && (
-                      <span className="ml-2 inline-block h-px w-4 translate-y-[-4px] bg-foreground" />
-                    )}
-                  </Link>
-                ) : (
-                  <a href="#" className={mobileLinkClass}>
-                    {item.label}
-                  </a>
-                )}
+                <Link
+                  to={item.to}
+                  activeOptions={{ exact: true }}
+                  className={mobileLinkClass}
+                >
+                  {item.label}
+                  {item.to === pathname && (
+                    <span className="ml-2 inline-block h-px w-4 translate-y-[-4px] bg-foreground" />
+                  )}
+                </Link>
               </li>
             ))}
           </ul>
