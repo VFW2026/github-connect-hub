@@ -66,6 +66,22 @@ function About() {
     <div className="min-h-screen bg-background text-foreground antialiased">
       <SiteHeader />
 
+      {/* FPO hero — will become a static image with a video clip on rollover */}
+      <section className="mx-auto max-w-[1200px] px-6 pt-[calc(5.25rem+24px)] md:px-10">
+        <div className="group relative overflow-hidden bg-muted">
+          <img
+            src={aboutHero}
+            alt="Studio atmosphere — placeholder image"
+            width={1920}
+            height={1080}
+            className="aspect-[16/9] w-full object-cover"
+          />
+          <span className="absolute right-4 bottom-4 rounded-full border border-border bg-background/80 px-3 py-1 text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+            FPO
+          </span>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-[1200px] px-6 pt-[calc(5.25rem+90px)] pb-15 md:px-10">
         <p className="text-xs tracking-[0.14em] uppercase text-muted-foreground">
           About / Lorem Studio
